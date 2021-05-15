@@ -19,11 +19,11 @@ const defaultState: AuthInterface = {
 const AuthContext = React.createContext(defaultState)
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [isConnected, setConnection] = useState(() => {
+  const [isConnected, setConnection] = useState<boolean>(() => {
     const localStorage = window.localStorage.getItem(CACHE_KEY)
     return localStorage ? true : false
   })
-  const [address, setAddress] = useState(() => {
+  const [address, setAddress] = useState<string | undefined>(() => {
     const localStorage = window.localStorage.getItem(CACHE_KEY)
     return localStorage ? JSON.parse(localStorage).address : undefined
   })

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import Providers from './Providers'
+import './assets/scss/style.scss'
 //import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(

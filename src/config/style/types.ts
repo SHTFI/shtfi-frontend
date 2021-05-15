@@ -1,5 +1,7 @@
 interface ColorScheme {
-  [key: string]: string
+  [key: string]: {
+    [key: string]: string
+  }
 }
 
 export interface Theme {

@@ -4,6 +4,7 @@
     "browser": true,
     "jest": true
   },
+  "extends": ["react-app"],
   "rules": {
     "no-console": ["warn", { "allow": ["info", "warn", "error"] }]
   }
