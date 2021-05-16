@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useWeb3React } from '@web3-react/core'
+import { ConnectorsByName } from './web3Context'
 
 const CACHE_KEY = 'AUTH'
 
@@ -23,14 +25,18 @@ const AuthProvider: React.FC = ({ children }) => {
     const localStorage = window.localStorage.getItem(CACHE_KEY)
     return localStorage ? true : false
   })
+
   const [address, setAddress] = useState<string | undefined>(() => {
     const localStorage = window.localStorage.getItem(CACHE_KEY)
     return localStorage ? JSON.parse(localStorage).address : undefined
   })
 
+  const { activate, deactivate } = useWeb3React()
+
   const login = () => {
-    setConnection(true)
-    setAddress('yo')
+    activate(ConnectorsByName.Injected).then((data) => {
+      setConnection(true)
+    })
     const localStorage = JSON.parse(
       window.localStorage.getItem(CACHE_KEY) as string
     )
@@ -43,6 +49,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const logout = () => {
     setAddress(undefined)
     setConnection(false)
+    deactivate()
     window.localStorage.removeItem(CACHE_KEY)
   }
 

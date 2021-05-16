@@ -5,7 +5,7 @@ export const theme: Theme = {
     colorPallette: {
       error: '#ce1212',
       white: '#F0F7F4',
-      primary: '#233e8b',
+      primary: '#01A7C2',
       secondary: '#1eae98',
       accent: '#a9f1df',
       accent2: '#ffffc7',
@@ -33,7 +33,7 @@ export const theme: Theme = {
     colorPallette: {
       error: '#ce1212',
       white: '#F0F7F4',
-      primary: '#233e8b',
+      primary: '#01A7C2',
       secondary: '#1eae98',
       accent: '#a9f1df',
       accent2: '#ffffc7',

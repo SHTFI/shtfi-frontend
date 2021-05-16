@@ -1,20 +1,12 @@
 import React from 'react'
-import useTheme from '../../hooks/useTheme'
-import { LinkButton, SocialIcons, Droplet } from '../../components/base'
+import { LinkButton, SocialIcons, Droplet, Main } from '../../components/base'
 import logo from '../../assets/images/shit.svg'
 import { FaTwitter, FaTelegram, FaEnvelope } from 'react-icons/fa'
 import styled from 'styled-components'
 
 const Home: React.FC = () => {
-  const { theme } = useTheme()
-
   return (
-    <main
-      style={{
-        backgroundColor: theme.backgroundColor.main,
-        color: theme.textColor.main,
-      }}
-    >
+    <Main>
       <header>
         <Droplet>
           <img src={logo} width="50" height="50" alt="Shit Defi logo" />
@@ -47,7 +39,7 @@ const Home: React.FC = () => {
         <p>Shit Defi is not trying to be the next moon project. It's shit.</p>
       </TextArea>
       <LinkButton to="/farms">Go To Farms</LinkButton>
-    </main>
+    </Main>
   )
 }
 

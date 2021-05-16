@@ -3,10 +3,8 @@ import styled from 'styled-components'
 
 const Div = styled.div`
   background-color: ${(props) => props.theme.colorPallette.primary};
-  width: 150px;
   border-radius: 50%;
   max-width: 90%;
-  height: 150px;
   margin: 100px auto 0 auto;
   display: flex;
   flex-direction: column;
@@ -20,15 +18,25 @@ const Div = styled.div`
     position: absolute;
     content: '';
     border-radius: 50% 0 50% 50%;
-    width: 150px;
-    height: 150px;
     z-index: -1;
     transform: rotate(-45deg);
   }
 `
+const Droplet: React.FC<{ small?: boolean }> = ({
+  children,
+  small = false,
+  ...rest
+}) => {
+  const StyledDroplet = styled(Div)`
+    width: ${() => (small ? '75px' : '150px')};
+    height: ${() => (small ? '75px' : '150px')};
 
-const Droplet: React.FC = ({ children, ...rest }) => {
-  return <Div {...rest}>{children}</Div>
+    &::before {
+      width: ${() => (small ? '75px' : '150px')};
+      height: ${() => (small ? '75px' : '150px')};
+    }
+  `
+  return <StyledDroplet {...rest}>{children}</StyledDroplet>
 }
 
 export default Droplet

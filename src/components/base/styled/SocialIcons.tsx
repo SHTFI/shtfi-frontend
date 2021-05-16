@@ -8,7 +8,11 @@ const SocialIcons: React.FC = () => {
   return (
     <StyledSocialIcons>
       {iconKeys.map((key) => (
-        <a href={siteInfo.socialLinks[key].link} title={`Go to our ${key}`}>
+        <a
+          key={`${Math.random() * 100}-${key}`}
+          href={siteInfo.socialLinks[key].link}
+          title={`Go to our ${key}`}
+        >
           <SocialIcon icon={key} />
         </a>
       ))}
