@@ -8,7 +8,7 @@ export const tokens: Token[] = [
     url: 'https://shitdefi.com',
     contract: {
       56: '',
-      97: '',
+      97: '0x91b135b8db19db2a7f72fcddb6b979a5342375af',
     },
     chain: Chain.BSC,
   },

@@ -5,7 +5,7 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import Web3 from 'web3'
 
-const CHAIN_ID = parseInt(process.env.CHAIN_ID as string)
+const CHAIN_ID = parseInt(process.env.REACT_APP_CHAIN_ID as string)
 
 const nodeUrl = getNodeUrls()[0]
 
@@ -33,6 +33,7 @@ export const ConnectorsByName: { [ConnectorName in ConnectorNames]: any } = {
   Bsc,
 }
 
-export const getLibrary = (provider: any) => {
-  return new Web3(provider)
+export const getLibrary = (provider: any): Web3 => {
+  const library = new Web3(provider)
+  return library
 }
