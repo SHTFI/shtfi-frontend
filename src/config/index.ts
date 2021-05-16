@@ -1,1 +1,3 @@
-export * from './info'
+import siteInfo from './info'
+
+export { siteInfo }

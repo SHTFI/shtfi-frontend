@@ -38,6 +38,8 @@ export const theme: Theme = {
       accent: '#a9f1df',
       accent2: '#ffffc7',
       black: '#001514',
+      dark: '#1D343B',
+      grey: '#425567',
     },
     textSize: {
       header: '2rem',

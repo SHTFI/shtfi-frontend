@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Home } from './views'
+import { Home, Farms } from './views'
+import MainNav from './components/main-nav'
 
 import { Switch, Route } from 'react-router-dom'
 
@@ -12,13 +13,20 @@ const App: React.FC = () => {
   }, [])
 
   const HomeView = Home.default
+  const FarmsView = Farms.default
 
   return (
-    <Switch>
-      <Route path="/">
-        <HomeView />
-      </Route>
-    </Switch>
+    <>
+      <MainNav />
+      <Switch>
+        <Route path="/farms">
+          <FarmsView />
+        </Route>
+        <Route path="/">
+          <HomeView />
+        </Route>
+      </Switch>
+    </>
   )
 }
 

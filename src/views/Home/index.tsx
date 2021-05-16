@@ -1,12 +1,12 @@
 import React from 'react'
 import useTheme from '../../hooks/useTheme'
-import { Button, Droplet } from '../../components/base'
+import { LinkButton, SocialIcons, Droplet } from '../../components/base'
 import logo from '../../assets/images/shit.svg'
 import { FaTwitter, FaTelegram, FaEnvelope } from 'react-icons/fa'
 import styled from 'styled-components'
 
 const Home: React.FC = () => {
-  const { isDark, toggleTheme, theme } = useTheme()
+  const { theme } = useTheme()
 
   return (
     <main
@@ -30,33 +30,26 @@ const Home: React.FC = () => {
               <FaEnvelope />
             </a>
           </SocialIcons>
-          {isDark}
-          <Button onClick={() => toggleTheme()}>
-            {isDark ? 'light' : 'dark'}
-          </Button>
         </Droplet>
       </header>
       <TextArea>
-        <p>Shit Defi is not trying to be the next moon project. It's shit.</p>
         <p>
-          It is a completely honest and open project but please be aware that
-          your funds are at risk and it has been made as a personal project.
+          Please be aware that your funds are at risk and Shit Defi has been
+          made as a personal side project.
         </p>
+        <p>
+          Shit Defi is an open source project which can be verified on our{' '}
+          <a href="https://github.com/shitdefi" title="Verify our GitHub">
+            GitHub
+          </a>
+          .
+        </p>
+        <p>Shit Defi is not trying to be the next moon project. It's shit.</p>
       </TextArea>
+      <LinkButton to="/farms">Go To Farms</LinkButton>
     </main>
   )
 }
-
-const SocialIcons = styled.div`
-  display: flex;
-  justify-content: center;
-  font-size: 18px;
-
-  a {
-    color: ${(props) => props.theme.colorPallette.white};
-    margin: 2px;
-  }
-`
 
 const TextArea = styled.section`
   font-size: 16px;
@@ -65,6 +58,8 @@ const TextArea = styled.section`
   line-height: 18px;
   letter-spacing: 1.5px;
   opacity: 0.9;
+  max-width: 400px;
+  font-weight: normal;
 `
 
 export default Home

@@ -3,11 +3,11 @@ import styled from 'styled-components'
 
 const Div = styled.div`
   background-color: ${(props) => props.theme.colorPallette.primary};
-  width: 200px;
+  width: 150px;
   border-radius: 50%;
   max-width: 90%;
-  height: 200px;
-  margin: 50px auto;
+  height: 150px;
+  margin: 100px auto 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,8 +20,8 @@ const Div = styled.div`
     position: absolute;
     content: '';
     border-radius: 50% 0 50% 50%;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     z-index: -1;
     transform: rotate(-45deg);
   }

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-const Button = styled.button`
+const LinkButton = styled(Link)`
   border: 2px solid transparent;
   appearance: none;
   background-color: ${(props) => props.theme.colorPallette.primary};
@@ -11,6 +12,6 @@ const Button = styled.button`
   margin: 5px;
   text-transform: uppercase;
   display: inline-block;
-  cursor: pointer;
+  text-decoration: none;
 `
-export default Button
+export default LinkButton
