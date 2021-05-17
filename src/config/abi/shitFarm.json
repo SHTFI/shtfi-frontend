@@ -142,16 +142,23 @@
     "inputs": [
       { "internalType": "uint256", "name": "_allocPoint", "type": "uint256" },
       {
-        "internalType": "contract IBEP20",
+        "internalType": "contract IERC20",
         "name": "_stakedToken",
         "type": "address"
       },
-      { "internalType": "uint256", "name": "_start", "type": "uint256" },
+      { "internalType": "uint256", "name": "_startBlock", "type": "uint256" },
       { "internalType": "bool", "name": "_withUpdate", "type": "bool" }
     ],
     "name": "add",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "currentlyActive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -166,7 +173,7 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_devaddr", "type": "address" }
+      { "internalType": "address", "name": "_devAddr", "type": "address" }
     ],
     "name": "dev",
     "outputs": [],
@@ -175,7 +182,7 @@
   },
   {
     "inputs": [],
-    "name": "devaddr",
+    "name": "devAddr",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
@@ -191,14 +198,23 @@
   },
   {
     "inputs": [],
-    "name": "lastRewardBlock",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
+    "name": "endMining",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "massUpdatePools",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_newFarm", "type": "address" }
+    ],
+    "name": "migrateShitToken",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -225,7 +241,7 @@
     "name": "poolInfo",
     "outputs": [
       {
-        "internalType": "contract IBEP20",
+        "internalType": "contract IERC20",
         "name": "stakedToken",
         "type": "address"
       },
@@ -233,7 +249,12 @@
       { "internalType": "uint256", "name": "allocPoint", "type": "uint256" },
       { "internalType": "uint256", "name": "startBlock", "type": "uint256" },
       { "internalType": "uint256", "name": "shitAlloc", "type": "uint256" },
-      { "internalType": "uint256", "name": "shitPerBlock", "type": "uint256" }
+      { "internalType": "uint256", "name": "shitPerBlock", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "lastRewardBlock",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -264,18 +285,20 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "_shitPerBlock", "type": "uint256" }
+    ],
+    "name": "setShitPerBlock",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "shit",
     "outputs": [
       { "internalType": "contract ShitToken", "name": "", "type": "address" }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "shitPerAllocPoint",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -289,13 +312,6 @@
   {
     "inputs": [],
     "name": "totalAllocPoint",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "totalShitStaked",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"

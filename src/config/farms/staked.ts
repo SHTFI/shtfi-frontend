@@ -1,14 +1,14 @@
 import { Farm, Chain } from '../types'
 const farms: Farm[] = [
   {
-    contract: '',
+    contract: '0x6a02e48EA47F14010FBBe613F42a7f5784703f78',
     stakedToken: {
       name: 'Monster Slayer Shares',
       icon: '',
       symbol: 'MSS',
       contract: {
         56: '',
-        97: '',
+        97: '0x42942d731496287496274fe3b727dc0cdba9aa25',
       },
       url: '/',
       chain: Chain.BSC,

@@ -24,6 +24,7 @@ const useAuth = () => {
   }, [])
 
   useEffect(() => {
+    if (!ethereum) return
     const handleConnect = async () => {
       await activate(ConnectorsByName.Injected)
       console.info('Connected')
@@ -45,6 +46,7 @@ const useAuth = () => {
       console.info("Handling 'chainChanged' event with payload", chainId)
       await activate(ConnectorsByName.Injected)
     }
+
     const handleNetworkChanged = async (networkId: string | number) => {
       console.info("Handling 'networkChanged' event with payload", networkId)
       await activate(ConnectorsByName.Injected)
@@ -65,7 +67,7 @@ const useAuth = () => {
         ethereum.removeListener('networkChanged', handleNetworkChanged)
       }
     }
-  }, [active, activate, account, library, chainId, connector])
+  }, [active, activate, deactivate, account, library, chainId, connector])
 
   const login = async (event?: any) => {
     try {
