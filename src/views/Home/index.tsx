@@ -1,6 +1,6 @@
 import React from 'react'
 import { LinkButton, SocialIcons, Droplet, Main } from '../../components/base'
-import logo from '../../assets/images/shit.svg'
+import logo from '../../assets/images/shit-logo.svg'
 import { FaTwitter, FaTelegram, FaEnvelope } from 'react-icons/fa'
 import styled from 'styled-components'
 

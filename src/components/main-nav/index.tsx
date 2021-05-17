@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button, SocialIcons } from '../base'
-import logo from '../../assets/images/shit.svg'
-import { Link } from 'react-router-dom'
+import logo from '../../assets/images/shit-logo.svg'
+import { Link, useHistory } from 'react-router-dom'
 import { siteInfo } from '../../config'
 import { useAuth } from '../../hooks'
-import { tokens } from '../../config/contracts'
 
 const MainNav: React.FC = () => {
   const [drawerOpen, setDrawOpen] = useState<boolean>(false)
-  const { login, logout, isConnected } = useAuth()
+  const { login, address, isConnected } = useAuth()
+  const history = useHistory()
 
   const navDrawerToggle = () => {
     setDrawOpen(!drawerOpen)
   }
 
-  const handleAuth = () => (isConnected ? logout() : login())
+  const handleAuth = () => {
+    if (!isConnected) {
+      login()
+      return
+    }
+    return history.push(`/account/${address}`)
+  }
 
   return (
     <>
@@ -23,10 +29,12 @@ const MainNav: React.FC = () => {
         <NavLogoLink to="/">
           <img width="25" height="25" src={logo} alt="Shit Defi logo" />
         </NavLogoLink>
-        <NavButton onClick={navDrawerToggle}>Menu</NavButton>
-        <NavButton onClick={handleAuth}>
-          {isConnected ? 'Logout' : 'Login'}
-        </NavButton>
+        <NavButtons>
+          <NavButton onClick={navDrawerToggle}>Menu</NavButton>
+          <NavButton onClick={handleAuth}>
+            {isConnected ? 'Account' : 'Login'}
+          </NavButton>
+        </NavButtons>
       </Nav>
       <Drawer className={drawerOpen ? 'visible' : ''}>
         <DrawerContent>
@@ -67,6 +75,10 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
 `
+const NavButtons = styled.div`
+  display: block;
+`
+
 const NavButton = styled(Button)`
   background-color: transparent;
 `

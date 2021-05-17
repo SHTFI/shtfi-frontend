@@ -1,6 +1,6 @@
 import React from 'react'
 import { Droplet } from '../../components/base'
-import logo from '../../assets/images/shit.svg'
+import logo from '../../assets/images/shit-logo.svg'
 import styled from 'styled-components'
 import { FaTwitter, FaTelegram, FaEnvelope } from 'react-icons/fa'
 

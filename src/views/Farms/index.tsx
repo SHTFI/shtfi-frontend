@@ -1,6 +1,6 @@
 import React from 'react'
 import { Droplet, Main } from '../../components/base'
-import logo from '../../assets/images/shit.svg'
+import logo from '../../assets/images/shit-logo.svg'
 import { Card } from '../../components/base'
 import styled from 'styled-components'
 
