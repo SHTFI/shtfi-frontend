@@ -83,7 +83,14 @@ const useAuth = () => {
     window.localStorage.removeItem(CACHE_KEY)
   }
 
-  return { login, logout, account, library, chainId, active }
+  return {
+    login,
+    logout,
+    address: account,
+    library,
+    chainId,
+    isConnected: active,
+  }
 }
 
 export default useAuth

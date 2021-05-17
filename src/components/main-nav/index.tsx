@@ -4,23 +4,18 @@ import { Button, SocialIcons } from '../base'
 import logo from '../../assets/images/shit.svg'
 import { Link } from 'react-router-dom'
 import { siteInfo } from '../../config'
-import { useAuth, useTokenBalance } from '../../hooks'
+import { useAuth } from '../../hooks'
 import { tokens } from '../../config/contracts'
 
 const MainNav: React.FC = () => {
   const [drawerOpen, setDrawOpen] = useState<boolean>(false)
-  const { login, logout, active } = useAuth()
-  const { tokenBalance, getTokenBalance } = useTokenBalance()
+  const { login, logout, isConnected } = useAuth()
 
   const navDrawerToggle = () => {
     setDrawOpen(!drawerOpen)
   }
 
-  useEffect(() => {
-    getTokenBalance(tokens[0])
-  }, [])
-
-  console.log(tokenBalance)
+  const handleAuth = () => (isConnected ? logout() : login())
 
   return (
     <>
@@ -29,16 +24,8 @@ const MainNav: React.FC = () => {
           <img width="25" height="25" src={logo} alt="Shit Defi logo" />
         </NavLogoLink>
         <NavButton onClick={navDrawerToggle}>Menu</NavButton>
-        <NavButton
-          onClick={() => {
-            if (active) {
-              logout()
-            } else {
-              login()
-            }
-          }}
-        >
-          {active ? 'Logout' : 'Login'}
+        <NavButton onClick={handleAuth}>
+          {isConnected ? 'Logout' : 'Login'}
         </NavButton>
       </Nav>
       <Drawer className={drawerOpen ? 'visible' : ''}>
