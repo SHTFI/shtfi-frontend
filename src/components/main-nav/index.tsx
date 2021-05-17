@@ -1,19 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Button, SocialIcons } from '../base'
 import logo from '../../assets/images/shit.svg'
 import { Link } from 'react-router-dom'
 import { siteInfo } from '../../config'
 import { useAuth, useTokenBalance } from '../../hooks'
+import { tokens } from '../../config/contracts'
 
 const MainNav: React.FC = () => {
   const [drawerOpen, setDrawOpen] = useState<boolean>(false)
   const { login, logout, active } = useAuth()
-  const { tokenBalance } = useTokenBalance()
+  const { tokenBalance, getTokenBalance } = useTokenBalance()
 
   const navDrawerToggle = () => {
     setDrawOpen(!drawerOpen)
   }
+
+  useEffect(() => {
+    getTokenBalance(tokens[0])
+  }, [])
+
+  console.log(tokenBalance)
 
   return (
     <>
