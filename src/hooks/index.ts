@@ -1,6 +1,6 @@
 export { default as useWeb3 } from './useWeb3'
 export { default as useTheme } from './useTheme'
 export { default as useAuth } from './useAuth'
-export { default as useNativeBalance } from './useNativeBalance'
 export { default as useTokenBalance } from './useTokenBalance'
-export { default as useFarm } from './useFarm'
+export { default as useTokenContract } from './useTokenContract'
+export { default as useFarmContract } from './useFarmContract'

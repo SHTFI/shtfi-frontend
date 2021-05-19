@@ -1,34 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import erc20ABI from '../config/abi/erc20.json'
-import { Contract, Token } from '../config/types'
-import { getContract } from '../utils'
-import web3 from 'web3'
-import { useWeb3 } from '.'
-import { tokens } from '../config/contracts'
+import Web3 from 'web3'
+import { useWeb3, useTokenContract } from '.'
 
 const useTokenBalance = () => {
-  const [tokenBalance, setTokenBalance] = useState<number>(0)
-  const { account, chainId } = useWeb3React<web3>()
+  const { account } = useWeb3React<Web3>()
+  const { tokenContract, setActiveTokenContract } = useTokenContract()
+  const [tokenBalance, setTokenBalance] = useState(0)
+  const currentToken = useRef<string>('')
   const web3 = useWeb3()
 
-  useEffect(() => {
-    getTokenBalance(tokens[0])
-  }, [account, chainId])
-
-  const getTokenBalance = async (token: Token) => {
-    if (account && chainId) {
-      const contract = getContract(
-        erc20ABI,
-        tokens[0].contract[chainId as keyof Contract]
-      )
-      const request = await contract.methods.balanceOf(account).call()
-      const balance = parseFloat(web3.utils.fromWei((await request).toString()))
-      setTokenBalance(balance)
-    }
+  const setActiveTokenBalance = async (tokenAddress: string) => {
+    currentToken.current = tokenAddress
   }
 
-  return { tokenBalance, getTokenBalance }
+  useEffect(() => {
+    const getTokenBalance = async () => {
+      if (account && tokenContract) {
+        const request = await tokenContract.methods.balanceOf(account).call()
+        const balance = parseFloat(
+          web3.utils.fromWei((await request).toString())
+        )
+        setTokenBalance(balance)
+      }
+    }
+
+    if (tokenContract?.options.address !== currentToken.current) {
+      setActiveTokenContract(currentToken.current)
+    } else {
+      getTokenBalance()
+    }
+  }, [currentToken, account, setActiveTokenContract, tokenContract, web3.utils])
+  return { tokenBalance, setActiveTokenBalance }
 }
 
 export default useTokenBalance

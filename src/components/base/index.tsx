@@ -4,6 +4,6 @@ import Droplet from './styled/Droplet'
 import Main from './styled/Main'
 import SocialIcon from './raw/SocialIcon'
 import SocialIcons from './styled/SocialIcons'
-import Card from './styled/Card'
+import Card from '../card'
 
 export { Button, Droplet, LinkButton, SocialIcon, SocialIcons, Main, Card }

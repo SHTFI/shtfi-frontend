@@ -18,6 +18,38 @@ export interface Farm {
   rewardToken: Token | 'default'
 }
 
+export enum FarmTypes {
+  Staked = 'staked',
+  Fee = 'fee',
+}
+
+export interface FarmContract {
+  contract: Contract
+  type: FarmTypes
+  rewardToken: Token
+}
+
 export enum Chain {
   BSC = 'BSC',
+}
+
+export interface SocialLink {
+  link: string
+}
+
+export type SocialPlatforms = {
+  [key: string]: SocialLink
+}
+
+export interface NavLink {
+  url: string
+  label: string
+  title: string
+}
+
+export interface SiteInfo {
+  title: string
+  description: string
+  socialLinks: SocialPlatforms
+  navLinks: NavLink[]
 }

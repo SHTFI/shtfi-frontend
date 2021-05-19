@@ -1,23 +1,4 @@
-interface SocialLink {
-  link: string
-}
-
-type SocialPlatforms = {
-  [key: string]: SocialLink
-}
-
-interface NavLink {
-  url: string
-  label: string
-  title: string
-}
-
-interface SiteInfo {
-  title: string
-  description: string
-  socialLinks: SocialPlatforms
-  navLinks: NavLink[]
-}
+import { SiteInfo } from '../types'
 
 const siteInfo: SiteInfo = {
   title: 'Shit Defi',
