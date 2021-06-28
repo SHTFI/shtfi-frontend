@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Home, Farms } from './views'
+import { Home, Farms, Farm } from './views'
 import MainNav from './components/main-nav'
-
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Overlay } from './components/base'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -14,17 +14,16 @@ const App: React.FC = () => {
 
   const HomeView = Home.default
   const FarmsView = Farms.default
+  const FarmView = Farm.default
 
   return (
     <>
       <MainNav />
+      <Overlay />
       <Switch>
-        <Route path="/farms">
-          <FarmsView />
-        </Route>
-        <Route path="/">
-          <HomeView />
-        </Route>
+        <Route path="/farm/:stakedToken" component={FarmView} />
+        <Route path="/farms" component={FarmsView} />
+        <Route path="/" component={HomeView} />
       </Switch>
     </>
   )

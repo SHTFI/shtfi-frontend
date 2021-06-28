@@ -1,39 +1,46 @@
 import { getNodeUrls } from '../utils'
-import {} from '@web3-react/core'
-import { BscConnector } from '@binance-chain/bsc-connector'
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { NodeList } from '../utils/getRPCEndpoint'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import Web3 from 'web3'
+import { NetworkConnector } from '@web3-react/network-connector'
+import { Web3Provider } from '@ethersproject/providers'
 
-const CHAIN_ID = parseInt(process.env.REACT_APP_CHAIN_ID as string)
+// Get a list of all compatible chain IDs which have been correctly typed
+const CHAIN_IDS = (process.env.REACT_APP_CHAIN_ID as string)
+  .split(',')
+  .map((id) => parseInt(id))
 
-const nodeUrl = getNodeUrls()[0]
+/**
+ * Get the default chain ID by first typing the env variable to a string and
+ * then parsing it as an integer to then type as a key of NodeList
+ */
+const DEFAULT_CHAIN_ID = parseInt(
+  process.env.REACT_APP_DEFAULT_CHAIN_ID as string
+) as keyof NodeList
 
-const Bsc = new BscConnector({ supportedChainIds: [CHAIN_ID] })
+// Get an object with all Network Endpoints
+const nodeUrls = getNodeUrls()
 
-const Injected = new InjectedConnector({
-  supportedChainIds: [CHAIN_ID],
+// Create our inject web3 connector using our array of valid chain IDs
+export const injected = new InjectedConnector({
+  supportedChainIds: [...CHAIN_IDS],
 })
-const WalletConnect = new WalletConnectConnector({
-  rpc: { [CHAIN_ID]: nodeUrl },
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
-  pollingInterval: 12000,
+
+// Create our http network connector which our correctly typed array of RPC end points
+export const network = new NetworkConnector({
+  urls: { ...nodeUrls[DEFAULT_CHAIN_ID] },
+  defaultChainId: DEFAULT_CHAIN_ID,
 })
 
 enum ConnectorNames {
   Injected = 'Injected',
-  WalletConnect = 'WalletConnect',
-  BSC = 'Bsc',
+  Network = 'Network',
 }
 
-export const ConnectorsByName: { [ConnectorName in ConnectorNames]: any } = {
-  Injected,
-  WalletConnect,
-  Bsc,
+export const connectorsByName: { [ConnectorName in ConnectorNames]: any } = {
+  [ConnectorNames.Injected]: injected,
+  [ConnectorNames.Network]: network,
 }
 
-export const getLibrary = (provider: any): Web3 => {
-  const library = new Web3(provider)
-  return library
+export const getLibrary = (provider: any): Web3Provider => {
+  return new Web3Provider(provider)
 }

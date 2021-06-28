@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useWeb3 } from '.'
 import shitFarmABI from '../config/abi/shitFarm.json'
-import { Contract } from 'web3-eth-contract'
-import { AbiItem } from 'web3-utils'
+import { Contract, ContractInterface } from '@ethersproject/contracts'
 
 interface FarmInfo {
   allocPoint: string | undefined
@@ -16,12 +15,11 @@ interface FarmInfo {
 
 const useFarm = () => {
   const [farmContract, setFarmContract] = useState<Contract>()
-  const web3 = useWeb3()
 
   const setActiveFarmContract = (address: string) => {
-    const contract = new web3.eth.Contract(
-      shitFarmABI as unknown as AbiItem,
-      address
+    const contract = new Contract(
+      address,
+      shitFarmABI as unknown as ContractInterface
     )
 
     if (contract) {

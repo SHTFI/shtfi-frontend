@@ -10,6 +10,7 @@ export interface Token {
   icon: string
   contract: Contract
   chain: Chain
+  description?: string[]
 }
 
 export interface Farm {

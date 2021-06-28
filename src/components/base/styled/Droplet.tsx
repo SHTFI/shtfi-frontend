@@ -5,7 +5,7 @@ const Div = styled.div`
   background-color: ${(props) => props.theme.colorPallette.primary};
   border-radius: 50%;
   max-width: 90%;
-  margin: 100px auto 0 auto;
+  margin: 75px auto 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -4,23 +4,13 @@ import { Button, SocialIcons } from '../base'
 import logo from '../../assets/images/shit-logo.svg'
 import { Link, useHistory } from 'react-router-dom'
 import { siteInfo } from '../../config'
-import { useAuth } from '../../hooks'
 
 const MainNav: React.FC = () => {
   const [drawerOpen, setDrawOpen] = useState<boolean>(false)
-  const { login, address, isConnected } = useAuth()
   const history = useHistory()
 
   const navDrawerToggle = () => {
     setDrawOpen(!drawerOpen)
-  }
-
-  const handleAuth = () => {
-    if (!isConnected) {
-      login()
-      return
-    }
-    return history.push(`/account/${address}`)
   }
 
   return (
@@ -31,9 +21,7 @@ const MainNav: React.FC = () => {
         </NavLogoLink>
         <NavButtons>
           <NavButton onClick={navDrawerToggle}>Menu</NavButton>
-          <NavButton onClick={handleAuth}>
-            {isConnected ? 'Account' : 'Login'}
-          </NavButton>
+          <NavButton onClick={() => console.log('login')}>Login</NavButton>
         </NavButtons>
       </Nav>
       <Drawer className={drawerOpen ? 'visible' : ''}>
@@ -69,7 +57,7 @@ const Nav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: ${(props) => props.theme.colorPallette.dark};
+  background-color: ${(props) => props.theme.colorPallette.black};
   z-index: 9;
   width: 100%;
   display: flex;
@@ -119,7 +107,7 @@ const DrawerContent = styled.div`
   height: 100%;
   width: 300px;
   max-width: 90%;
-  background-color: ${(props) => props.theme.colorPallette.grey};
+  background-color: ${(props) => props.theme.colorPallette.black};
   top: 0;
   left: 0;
   position: fixed;
@@ -128,6 +116,7 @@ const DrawerContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  transition: 0.3s ease;
 `
 const DrawerHeader = styled.header`
   display: flex;

@@ -1,9 +1,8 @@
-import Web3 from 'web3'
+import { JsonRpcProvider } from '@ethersproject/providers'
 import { getNodeUrls } from './getRPCEndpoint'
 
-const RPC_URL = getNodeUrls()[0]
+const RPC_URL = getNodeUrls()[97]
 
-const httpProvider = new Web3.providers.HttpProvider(RPC_URL)
-export const httpWeb3 = new Web3(httpProvider)
+const httpProvider = new JsonRpcProvider(RPC_URL[0])
 
-export const getWeb3Http = () => httpWeb3
+export const getWeb3Http = () => httpProvider

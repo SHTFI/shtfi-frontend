@@ -19,10 +19,11 @@ export const theme: Theme = {
     },
     cards: {},
     textColor: {
-      main: '001514',
+      main: '#001514',
     },
     backgroundColor: {
       main: '#F0F7F4',
+      nav: '',
     },
     nav: {},
     borders: {},

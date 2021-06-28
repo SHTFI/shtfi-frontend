@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import erc20ABI from '../config/abi/erc20.json'
-import { Contract } from 'web3-eth-contract'
-import { useWeb3 } from '.'
-import { AbiItem } from 'web3-utils'
+import { Contract, ContractInterface } from '@ethersproject/contracts'
 
 const useTokenContract = () => {
   const [tokenContract, setTokenContract] = useState<Contract>()
-  const web3 = useWeb3()
 
   const setActiveTokenContract = (address: any) => {
-    const contract = new web3.eth.Contract(
-      erc20ABI as unknown as AbiItem,
-      address
+    console.log(address)
+    const contract = new Contract(
+      address,
+      erc20ABI as unknown as ContractInterface
     )
     if (contract) return setTokenContract(contract)
   }

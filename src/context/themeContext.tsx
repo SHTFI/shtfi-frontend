@@ -34,7 +34,7 @@ const ThemeProvider: React.FC = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme, theme }}>
-      <StyledThemeProvider theme={isDark ? theme.dark : theme.light}>
+      <StyledThemeProvider theme={isDark ? theme.dark : theme.dark}>
         {children}
       </StyledThemeProvider>
     </ThemeContext.Provider>
