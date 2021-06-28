@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import web3 from 'web3'
 
 const useNativeBalance = () => {
   const [nativeBalance, setNativeBalance] = useState<number>(0)
-  const { library, account } = useWeb3React<web3>()
+  const { library, account } = useWeb3React()
 
   useEffect(() => {
     if (account && library) {
