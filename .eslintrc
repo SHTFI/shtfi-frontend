@@ -1,0 +1,11 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "extends": ["react-app"],
+  "rules": {
+    "no-console": ["warn", { "allow": ["info", "warn", "error"] }]
+  }
+}

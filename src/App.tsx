@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import { Home, Farms, Farm } from './views'
+import MainNav from './components/main-nav'
+import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Overlay } from './components/base'
 
-function App() {
+const App: React.FC = () => {
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--vh',
+      `${window.innerHeight / 100}`
+    )
+  }, [])
+
+  const HomeView = Home.default
+  const FarmsView = Farms.default
+  const FarmView = Farm.default
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <MainNav />
+      <Overlay />
+      <Switch>
+        <Route path="/farm/:stakedToken" component={FarmView} />
+        <Route path="/farms" component={FarmsView} />
+        <Route path="/" component={HomeView} />
+      </Switch>
+    </>
+  )
 }
 
-export default App;
+export default App
