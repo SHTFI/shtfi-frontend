@@ -5,30 +5,35 @@ import { Farm } from '../../config/types'
 import farms from '../../config/farms'
 import styled from 'styled-components'
 import { ModalContext } from '../../context'
-import { useWeb3React } from '@web3-react/core'
-import { Web3Provider } from '@ethersproject/providers'
-import { useInactiveListener, useEagerConnect } from '../../hooks'
-
+import { useWeb3 } from '../../hooks'
+import { useFarmContract, useTokenContract } from '../../hooks'
 interface FarmRoute {
   farm: string
 }
 
 const FarmView: React.FC = () => {
+  // Get the current web3 library
+  const { active, library } = useWeb3()
+  // Get farm contract instance
+  const { farmContract, setActiveFarmContract } = useFarmContract()
+  // Get staked token contract instance
+  const {
+    tokenContract: stakedTokenContract,
+    setActiveTokenContract: setActiveStakedTokenContract,
+  } = useTokenContract()
+  // Get staked reward contract instance
+  const {
+    tokenContract: rewardTokenContract,
+    setActiveTokenContract: setActiveRewardTokenContract,
+  } = useTokenContract()
   // Use state to set the farm for this page
   const [currentFarm, setCurrentFarm] = useState<Farm>()
-  // Set our activating web3 connector in the state to prevent infinitely trying to connect to one
-  const [activatingConnector, setActivatingConnector] = useState<any>()
-  // Get our web3 tools from the useWeb3React library
-  const { chainId, account, activate, library, connector } =
-    useWeb3React<Web3Provider>()
   // Use our modal context
   const { toggleModal, closeModal } = useContext(ModalContext)
   // Get the matched farm from the URL
   const match = useRouteMatch('/farm/:farm')
   // Type the params to satisfy typescript
   const typedParams = match?.params as FarmRoute
-  // Set a variable so we know when we have tried to connect to web3 using a pre authorised wallet
-  const triedEager = useEagerConnect()
 
   // Use effect to change the active farm
   useEffect(() => {
@@ -40,6 +45,20 @@ const FarmView: React.FC = () => {
       setCurrentFarm(farmObject)
     }
   }, [currentFarm, typedParams]) // Will update if the current farm changes or the URL does
+
+  // useEffect to get our farm contract instance
+  useEffect(() => {
+    if (
+      (!farmContract && currentFarm) ||
+      (farmContract &&
+        currentFarm &&
+        currentFarm?.contract !== farmContract.address)
+    ) {
+      setActiveFarmContract(currentFarm?.contract)
+      setActiveStakedTokenContract(currentFarm.stakedToken.contract[97])
+      setActiveRewardTokenContract(currentFarm.rewardToken.contract[97])
+    }
+  }, [farmContract, setActiveFarmContract, currentFarm])
 
   // Farm modal
   const FarmModalContent: React.FC<{ closeModal: () => void }> = ({
@@ -93,8 +112,11 @@ const FarmView: React.FC = () => {
     toggleModal(<StakedTokenModalContent closeModal={closeModal} />)
   }
 
-  // Try and add our inactive listener if triedEager or activatingConnector is falsy
-  useInactiveListener(!triedEager || !!activatingConnector)
+  console.log(farmContract)
+  console.log(stakedTokenContract)
+  if (rewardTokenContract) {
+    rewardTokenContract.totalSupply().then((data: any) => console.log(data))
+  }
 
   return (
     <Main>
@@ -125,7 +147,7 @@ const FarmView: React.FC = () => {
             <span>12% APY</span>
             <span>0.01% DAILY</span>
           </div>
-          <button onClick={() => console.log('login')}>Login</button>
+          <button onClick={() => console.info('login')}>Login</button>
         </CardUserBalance>
         <CardRewardsButton>Rewards: 3123 SHTFI</CardRewardsButton>
         <CardActionButtons>

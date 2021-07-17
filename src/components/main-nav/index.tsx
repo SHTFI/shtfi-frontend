@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button, SocialIcons } from '../base'
 import logo from '../../assets/images/shit-logo.svg'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { siteInfo } from '../../config'
 
 const MainNav: React.FC = () => {
   const [drawerOpen, setDrawOpen] = useState<boolean>(false)
-  const history = useHistory()
 
   const navDrawerToggle = () => {
     setDrawOpen(!drawerOpen)
@@ -21,7 +20,7 @@ const MainNav: React.FC = () => {
         </NavLogoLink>
         <NavButtons>
           <NavButton onClick={navDrawerToggle}>Menu</NavButton>
-          <NavButton onClick={() => console.log('login')}>Login</NavButton>
+          <NavButton onClick={() => console.info('login')}>Login</NavButton>
         </NavButtons>
       </Nav>
       <Drawer className={drawerOpen ? 'visible' : ''}>

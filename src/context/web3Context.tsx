@@ -1,7 +1,7 @@
 import { getNodeUrls } from '../utils'
 import { NodeList } from '../utils/getRPCEndpoint'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import { NetworkConnector } from '@web3-react/network-connector'
+import { NetworkConnector } from '../connectors/networkConnector'
 import { Web3Provider } from '@ethersproject/providers'
 
 // Get a list of all compatible chain IDs which have been correctly typed
@@ -27,8 +27,8 @@ export const injected = new InjectedConnector({
 
 // Create our http network connector which our correctly typed array of RPC end points
 export const network = new NetworkConnector({
-  urls: { ...nodeUrls[DEFAULT_CHAIN_ID] },
-  defaultChainId: DEFAULT_CHAIN_ID,
+  urls: { 97: nodeUrls[DEFAULT_CHAIN_ID][0] },
+  defaultChainId: 97,
 })
 
 enum ConnectorNames {
