@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { injected } from '../context/web3Context'
+import { injected, network } from '../context/web3Context'
 
 // Function to listen to changes to the web3 interface
 const useInactiveListener = (suppress: boolean = false) => {
@@ -16,6 +16,7 @@ const useInactiveListener = (suppress: boolean = false) => {
       // Handle any connections to the ethereum class made with an injected connector
       const handleConnect = () => {
         console.info('Handling connect event')
+        console.log(injected)
         activate(injected)
       }
       // Handle changing of the current chain

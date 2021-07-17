@@ -16,7 +16,7 @@ export interface Token {
 export interface Farm {
   contract: string
   stakedToken: Token
-  rewardToken: Token | 'default'
+  rewardToken: Token
 }
 
 export enum FarmTypes {

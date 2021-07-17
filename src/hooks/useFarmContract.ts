@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useWeb3 } from '.'
 import shitFarmABI from '../config/abi/shitFarm.json'
 import { Contract, ContractInterface } from '@ethersproject/contracts'
 

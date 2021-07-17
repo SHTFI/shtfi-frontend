@@ -23,7 +23,7 @@ const useEagerConnect = () => {
         setTried(true)
       }
     })
-  }, [])
+  }, [activate])
 
   // If we connected successfully we will wait for confirmation then set the tried state to true
   useEffect(() => {
